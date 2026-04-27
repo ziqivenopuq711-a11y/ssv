@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="13svqqn_tv061.css">
+  <title>Mainnet | SSV Bug Bounty</title>
+  <meta name="description" content="Live Ethereum Mainnet smart contracts in scope for the SSV Bug Bounty Program. Critical vulnerabilities affecting real user funds are eligible for rewards up to $250,000.">
+  <style>
+    body { background: #0a0a0f; color: #f1f5f9; font-family: Rubik, ui-sans-serif, system-ui, sans-serif; }
+    .site-header { background: rgba(10,10,20,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(240,21,128,0.18); position: sticky; top:0; z-index:50; }
+    .site-header .inner { max-width:1200px; margin:0 auto; padding:0 1.5rem; display:flex; align-items:center; justify-content:space-between; height:64px; }
+    .logo-area { display:flex; align-items:center; gap:0.75rem; text-decoration:none; }
+    .logo-icon { width:36px; height:36px; background: linear-gradient(135deg,#f01580,#9d10bf); border-radius:8px; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:1rem; color:#fff; }
+    .logo-text { font-size:1.125rem; font-weight:700; color:#fff; letter-spacing:0.01em; }
+    .logo-text span { background: linear-gradient(90deg,#f01580,#9d10bf); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .site-nav { display:flex; align-items:center; gap:0.25rem; }
+    .site-nav a { color:rgba(255,255,255,0.75); text-decoration:none; font-size:0.875rem; font-weight:500; padding:0.375rem 0.75rem; border-radius:6px; transition:color .15s,background .15s; letter-spacing:0.02em; }
+    .site-nav a:hover, .site-nav a.active { color:#fff; background:rgba(240,21,128,0.12); }
+    .site-nav a.active { color:#f01580; }
+    .nav-cta { background: linear-gradient(135deg,#bb0038,#f01580,#9d10bf) !important; color:#fff !important; padding:0.45rem 1.1rem !important; border-radius:6px !important; font-weight:600 !important; }
+    .nav-cta:hover { opacity:0.88; }
+    .mobile-menu-btn { display:none; background:none; border:none; color:#fff; cursor:pointer; }
+    @media(max-width:768px){ .mobile-menu-btn { display:flex; } .site-nav { display:none; } }
+    .page-hero { max-width:1200px; margin:0 auto; padding:3rem 1.5rem 1.5rem; }
+    .hero-badge { display:inline-flex; align-items:center; gap:0.5rem; background:rgba(240,21,128,0.12); border:1px solid rgba(240,21,128,0.3); color:#f01580; font-size:0.8rem; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; padding:0.3rem 0.85rem; border-radius:999px; margin-bottom:1.25rem; }
+    .page-hero h1 { font-size:clamp(1.75rem,4vw,2.75rem); font-weight:700; color:#fff; margin-bottom:0.75rem; line-height:1.2; }
+    .page-hero h1 .accent { background:linear-gradient(90deg,#f01580,#9d10bf); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .page-hero p { font-size:1rem; color:rgba(255,255,255,0.6); max-width:620px; line-height:1.7; }
+    .breadcrumb { display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; color:rgba(255,255,255,0.4); margin-bottom:1.25rem; }
+    .breadcrumb a { color:rgba(255,255,255,0.55); text-decoration:none; }
+    .breadcrumb a:hover { color:#f01580; }
+    .main-layout { max-width:1200px; margin:0 auto; padding:2rem 1.5rem 3rem; display:grid; grid-template-columns:1fr 280px; gap:2rem; }
+    @media(max-width:900px){ .main-layout { grid-template-columns:1fr; } }
+    .section-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.75rem 2rem; margin-bottom:1.5rem; }
+    .section-card h2 { font-size:1.15rem; font-weight:700; color:#fff; margin-bottom:1rem; display:flex; align-items:center; gap:0.5rem; }
+    .section-card h2 .icon { width:28px; height:28px; background:linear-gradient(135deg,#bb0038,#f01580); border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .section-card h3 { font-size:1rem; font-weight:600; color:#fff; margin:1.25rem 0 0.6rem; }
+    .section-card p, .section-card li { font-size:0.9rem; color:rgba(255,255,255,0.7); line-height:1.75; }
+    .section-card ul { list-style:disc; padding-left:1.25rem; display:flex; flex-direction:column; gap:0.4rem; margin-bottom:0.75rem; }
+    .section-card ol { list-style:decimal; padding-left:1.25rem; display:flex; flex-direction:column; gap:0.5rem; }
+    .divider { height:1px; background:rgba(255,255,255,0.07); margin:1.25rem 0; }
+    .badge { display:inline-block; padding:0.2rem 0.6rem; border-radius:4px; font-size:0.75rem; font-weight:600; letter-spacing:0.04em; }
+    .badge-critical { background:rgba(240,21,128,0.15); color:#f01580; border:1px solid rgba(240,21,128,0.3); }
+    .badge-high { background:rgba(251,44,54,0.12); color:#fb2c36; border:1px solid rgba(251,44,54,0.3); }
+    .badge-medium { background:rgba(249,156,0,0.12); color:#f99c00; border:1px solid rgba(249,156,0,0.3); }
+    .badge-low { background:rgba(5,223,114,0.12); color:#05df72; border:1px solid rgba(5,223,114,0.3); }
+    .badge-info { background:rgba(48,128,255,0.12); color:#3080ff; border:1px solid rgba(48,128,255,0.3); }
+    .sidebar-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:1.25rem 1.5rem; margin-bottom:1.25rem; }
+    .sidebar-card h3 { font-size:0.82rem; font-weight:700; color:#fff; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.75rem; }
+    .sidebar-card p { font-size:0.85rem; color:rgba(255,255,255,0.65); line-height:1.6; }
+    .sidebar-card a { color:#f01580; text-decoration:none; font-size:0.85rem; }
+    .sidebar-card a:hover { text-decoration:underline; }
+    .scope-row { display:flex; justify-content:space-between; align-items:center; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.06); font-size:0.875rem; }
+    .scope-row:last-child { border-bottom:none; }
+    .scope-label { color:rgba(255,255,255,0.65); }
+    .highlight-box { background:linear-gradient(135deg,rgba(187,0,56,0.1),rgba(157,16,191,0.1)); border:1px solid rgba(240,21,128,0.18); border-radius:8px; padding:1rem 1.25rem; margin-bottom:1rem; font-size:0.875rem; color:rgba(255,255,255,0.8); }
+    .code-block { background:#111; border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:1rem 1.25rem; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:0.825rem; color:#e2e8f0; overflow-x:auto; margin:0.75rem 0; }
+    .address-block { background:#111; border:1px solid rgba(240,21,128,0.15); border-radius:6px; padding:0.6rem 1rem; font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace; font-size:0.8rem; color:#f01580; word-break:break-all; margin:0.5rem 0; }
+    .res-link { display:flex; align-items:center; gap:0.65rem; padding:0.6rem 0; border-bottom:1px solid rgba(255,255,255,0.06); color:rgba(255,255,255,0.75); text-decoration:none; font-size:0.875rem; transition:color .15s; }
+    .res-link:last-child { border-bottom:none; }
+    .res-link:hover { color:#f01580; }
+    .res-link svg { flex-shrink:0; color:rgba(240,21,128,0.8); }
+    .table-wrap { overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:0.865rem; }
+    table th { background:rgba(240,21,128,0.1); color:#f01580; font-weight:600; text-align:left; padding:0.6rem 0.9rem; border:1px solid rgba(255,255,255,0.08); font-size:0.78rem; text-transform:uppercase; letter-spacing:0.05em; }
+    table td { padding:0.65rem 0.9rem; border:1px solid rgba(255,255,255,0.07); color:rgba(255,255,255,0.75); }
+    table tr:nth-child(even) td { background:rgba(255,255,255,0.02); }
+    .reward-card { background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:10px; padding:1.25rem; }
+    .reward-card .level { font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:0.6rem; }
+    .reward-card .amount { font-size:1.4rem; font-weight:700; color:#fff; margin-bottom:0.35rem; }
+    .reward-card .desc { font-size:0.82rem; color:rgba(255,255,255,0.55); }
+    .reward-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:1rem; margin-bottom:1.5rem; }
+    .site-footer { background:rgba(10,10,20,0.98); border-top:1px solid rgba(255,255,255,0.07); margin-top:3rem; }
+    .footer-inner { max-width:1200px; margin:0 auto; padding:2.5rem 1.5rem; display:grid; grid-template-columns:1.5fr 1fr 1fr 1fr; gap:2rem; }
+    @media(max-width:768px){ .footer-inner { grid-template-columns:1fr 1fr; } }
+    @media(max-width:480px){ .footer-inner { grid-template-columns:1fr; } }
+    .footer-brand .logo-text { font-size:1.125rem; display:block; margin-bottom:0.75rem; }
+    .footer-brand p { font-size:0.82rem; color:rgba(255,255,255,0.45); line-height:1.65; max-width:240px; }
+    .footer-col h4 { font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:rgba(255,255,255,0.4); margin-bottom:0.9rem; }
+    .footer-col a { display:block; font-size:0.85rem; color:rgba(255,255,255,0.6); text-decoration:none; margin-bottom:0.45rem; transition:color .15s; }
+    .footer-col a:hover { color:#f01580; }
+    .footer-bottom { max-width:1200px; margin:0 auto; padding:1rem 1.5rem; border-top:1px solid rgba(255,255,255,0.06); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; }
+    .footer-bottom p { font-size:0.78rem; color:rgba(255,255,255,0.35); }
+
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="index.html" class="logo-area">
+      <div class="logo-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <span class="logo-text">SSV <span>Bug Bounty</span></span>
+    </a>
+    <nav class="site-nav">
+      <a href="index.html">Overview</a>
+      <a href="mainnet.html" class="active">Mainnet</a>
+      <a href="testnet.html">Testnet</a>
+      <a href="documentation.html">Documentation</a>
+      <a href="smart-contracts.html">Smart Contracts</a>
+      <a href="rewards.html">Rewards</a>
+      <a href="https://immunefi.com/bug-bounty/ssvnetwork/" target="_blank" rel="noopener" class="nav-cta">Submit Report</a>
+    </nav>
+    <button class="mobile-menu-btn" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="breadcrumb">
+    <a href="index.html">Overview</a>
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    <span style="color:rgba(255,255,255,0.7);">Mainnet</span>
+  </div>
+  <div class="hero-badge">
+    <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+    Ethereum Mainnet
+  </div>
+  <h1>Mainnet <span class="accent">Assets & Scope</span></h1>
+  <p>Live Ethereum Mainnet smart contracts in scope for the SSV Bug Bounty Program. Critical vulnerabilities affecting real user funds are eligible for rewards up to $250,000.</p>
+</section>
+
+<div class="main-layout">
+  <div class="content-col">
+    <div class="section-card">
+      <h2>
+        <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+        Mainnet Overview
+      </h2>
+      <p>The SSV Network Mainnet is the production deployment of the SSV protocol on Ethereum. All smart contracts listed here are live, hold real user funds, and are considered highest priority for security research. Vulnerabilities found in Mainnet contracts are eligible for the maximum reward tiers in the Bug Bounty Program.</p>
+      <div class="divider"></div>
+      <p>SSV Network deployed its core contracts on Ethereum Mainnet to support decentralized validator operations at scale. The protocol manages operator registrations, validator cluster formation, and fee distribution. Each of these components represents a critical attack surface that researchers should carefully audit.</p>
+      <div class="highlight-box">
+        <strong style="color:#fff;">Reward Calculation:</strong> Mainnet asset vulnerabilities are calculated at <strong style="color:#f01580;">10% of funds at risk</strong>, up to a maximum of $250,000. The minimum reward for a Critical finding is $50,000, ensuring researchers are incentivized to report even smaller impact bugs.
+      </div>
+    </div>
+
+    <div class="section-card">
+      <h2>
+        <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></span>
+        Mainnet Contract Addresses
+      </h2>
+      <p style="margin-bottom:1rem;">The following smart contracts are deployed on Ethereum Mainnet and are in scope for the Bug Bounty Program. Always verify addresses against the official SSV documentation before conducting research.</p>
+      <h3>SSVNetwork (Proxy)</h3>
+      <div class="address-block">0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1</div>
+      <h3>SSVNetwork (Implementation)</h3>
+      <div class="address-block">0x5a0e4298db0b23948b91c0ae97c2fe1de1ccd7b6</div>
+      <h3>SSVNetworkViews (Proxy)</h3>
+      <div class="address-block">0xafE30602b820C21b3B6AC47Cd4B8aD5A214DFB35</div>
+      <h3>SSV Token</h3>
+      <div class="address-block">0x9D65fF81a3c488d585bBfb0Bfe3c7707c7917f54</div>
+      <div class="divider"></div>
+      <p>All upgradeable proxies use the OpenZeppelin Transparent Proxy pattern. Researchers should audit both the proxy and implementation contracts for vulnerabilities, including storage collision issues unique to upgradeable contract architectures.</p>
+    </div>
+
+    <div class="section-card">
+      <h2>
+        <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
+        Attack Surfaces &amp; Research Areas
+      </h2>
+      <p style="margin-bottom:1rem;">Security researchers should focus on the following high-impact areas when examining Mainnet contracts:</p>
+      <h3>Fund Drainage &amp; Reentrancy</h3>
+      <p>Any path that allows an attacker to drain SSV tokens or ETH from cluster balances, operator earnings, or the DAO treasury. This includes classic reentrancy, cross-function reentrancy, and read-only reentrancy patterns.</p>
+      <h3>Validator Slashing &amp; Manipulation</h3>
+      <p>Vulnerabilities that allow an attacker to cause legitimate validators to be slashed, manipulate validator cluster states, or force validators into an inactive state without authorization. This directly impacts stakers using the SSV protocol.</p>
+      <h3>Governance &amp; Access Control</h3>
+      <p>Flaws in the DAO governance mechanism, fee update logic, or role-based access control that could allow an unauthorized party to change critical protocol parameters, drain fee revenue, or upgrade the protocol maliciously.</p>
+      <ul>
+        <li>Unauthorized operator fee changes beyond DAO-enforced limits</li>
+        <li>Bypassing the <code>onlyOwner</code> or <code>onlyDAO</code> modifiers</li>
+        <li>Manipulation of the liquidation threshold to harm cluster operators</li>
+        <li>Storage collision or initialization issues in upgradeable proxies</li>
+        <li>Integer overflow/underflow in balance calculations</li>
+      </ul>
+    </div>
+
+    <div class="section-card">
+      <h2>
+        <span class="icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></span>
+        Mainnet Scope Table
+      </h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Contract</th><th>Impact Category</th><th>Max Severity</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>SSVNetwork.sol</td><td>Fund loss, validator manipulation</td><td><span class="badge badge-critical">Critical</span></td></tr>
+            <tr><td>SSVClusters.sol</td><td>Cluster state manipulation</td><td><span class="badge badge-critical">Critical</span></td></tr>
+            <tr><td>SSVDAO.sol</td><td>Governance manipulation</td><td><span class="badge badge-high">High</span></td></tr>
+            <tr><td>SSVNetworkViews.sol</td><td>Data integrity issues</td><td><span class="badge badge-medium">Medium</span></td></tr>
+            <tr><td>SSVOperators.sol</td><td>Operator manipulation</td><td><span class="badge badge-high">High</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="sidebar-col">
+    <div class="sidebar-card">
+      <h3>Network</h3>
+      <div class="scope-row"><span class="scope-label">Chain</span><strong style="color:#fff;">Ethereum</strong></div>
+      <div class="scope-row"><span class="scope-label">Chain ID</span><strong style="color:#fff;">1</strong></div>
+      <div class="scope-row"><span class="scope-label">Status</span><span class="badge badge-low">Live</span></div>
+    </div>
+    <div class="sidebar-card">
+      <h3>Rewards</h3>
+      <div class="scope-row"><span class="scope-label">Critical</span><strong style="color:#fff;">Up to $250,000</strong></div>
+      <div class="scope-row"><span class="scope-label">High</span><strong style="color:#fff;">Up to $25,000</strong></div>
+      <div class="scope-row"><span class="scope-label">Medium</span><strong style="color:#fff;">$5,000</strong></div>
+      <div class="scope-row"><span class="scope-label">Low</span><strong style="color:#fff;">$1,000</strong></div>
+      <p style="margin-top:0.75rem;"><a href="rewards.html">View full details →</a></p>
+    </div>
+    <div class="sidebar-card">
+      <h3>Useful Links</h3>
+      <a href="https://etherscan.io/address/0xDD9BC35aE942eF0cFa76930954a156B3fF30a4E1" target="_blank" rel="noopener" class="res-link" style="padding:0.45rem 0;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        Etherscan Explorer
+      </a>
+      <a href="https://github.com/ssvlabs/ssv-network" target="_blank" rel="noopener" class="res-link" style="padding:0.45rem 0;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        GitHub Source Code
+      </a>
+      <a href="smart-contracts.html" class="res-link" style="padding:0.45rem 0;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        Smart Contracts Detail
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <span class="logo-text">SSV <span style="background:linear-gradient(90deg,#f01580,#9d10bf);-webkit-background-clip:text;-webkit-text-fill-color:transparent;">Bug Bounty</span></span>
+      <p>Securing the SSV Network through responsible disclosure. Help protect decentralized Ethereum staking infrastructure and earn rewards.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Program</h4>
+      <a href="index.html">Overview</a>
+      <a href="rewards.html">Rewards</a>
+      <a href="smart-contracts.html">Smart Contracts</a>
+      <a href="mainnet.html">Mainnet</a>
+      <a href="testnet.html">Testnet</a>
+    </div>
+    <div class="footer-col">
+      <h4>Resources</h4>
+      <a href="documentation.html">Documentation</a>
+      <a href="https://docs.ssv.network/" target="_blank" rel="noopener">SSV Docs</a>
+      <a href="https://github.com/ssvlabs/ssv-network" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://immunefi.com/bug-bounty/ssvnetwork/" target="_blank" rel="noopener">Immunefi</a>
+    </div>
+    <div class="footer-col">
+      <h4>Community</h4>
+      <a href="https://discord.gg/ssvnetwork" target="_blank" rel="noopener">Discord</a>
+      <a href="https://twitter.com/ssv_network" target="_blank" rel="noopener">Twitter / X</a>
+      <a href="https://t.me/ssvnetwork" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://ssv.network/" target="_blank" rel="noopener">Website</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 SSV Network Bug Bounty. All rights reserved.</p>
+    <p>Powered by <a href="https://immunefi.com/" target="_blank" rel="noopener" style="color:#f01580;">Immunefi</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
